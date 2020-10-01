@@ -17,9 +17,15 @@ ThisBuild / scapegoatVersion := {
   }
 }
 
+ThisBuild / fork in Test := true
+
+
 //ThisBuild / turbo := true
 
-resolvers += Resolver.sonatypeRepo("releases")
+ThisBuild / resolvers ++= Seq(
+  Resolver.sonatypeRepo("releases"),
+  ("OSS-Snapshots" at "https://oss.sonatype.org/service/local/repositories/snapshots/content/")
+)
 
 ThisBuild / crossScalaVersions := Seq(`scalaVersion_2.13`, `scalaVersion_2.12`)
 
@@ -43,7 +49,7 @@ ThisBuild / scalacOptions ++= Seq(
 
 ThisBuild / javacOptions ++= Seq("-Xlint:deprecation", "-Xdiags:verbose", "-source", targetJdk, "-target", targetJdk)
 
-val quillVersion = scala.util.Properties.propOrElse("quill.version", "3.5.2")
+val quillVersion = scala.util.Properties.propOrElse("quill.version", "quats_dynamic-SNAPSHOT")
 
 val scalaTestVersion = "3.2.2"
 
